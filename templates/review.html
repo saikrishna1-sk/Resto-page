@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Restaurant Reviews</title>
+
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/review.css') }}">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="header fade-in">
+      <h1 class="title">⭐ Customer Reviews</h1>
+      <p class="subtitle">See what others say & leave your feedback</p>
+    </header>
+
+    <!-- Review Section -->
+    <div class="review-section">
+
+      <!-- 🔥 Top Reviews Swiper -->
+      <!-- 🔥 Top Reviews Swiper -->
+<div class="top-reviews">
+  <h1>Top Reviews ⭐</h1>
+  <div class="swiper reviewSwiper">
+    <div class="swiper-wrapper">
+      
+      <!-- Review Screenshot 1 -->
+      <div class="swiper-slide review-card">
+        <img src="{{ url_for('static', filename='images/review/r1.png') }}" alt="Google Review 1">
+      </div>
+
+      <!-- Review Screenshot 2 -->
+      <div class="swiper-slide review-card">
+        <img src="{{ url_for('static', filename='images/review/r2.png') }}" alt="Google Review 2">
+      </div>
+
+      <!-- Review Screenshot 3 -->
+      <div class="swiper-slide review-card">
+        <img src="{{ url_for('static', filename='images/review/r3.png') }}" alt="Google Review 3">
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+      <!-- Review Form -->
+      <div class="review-form" id="reviewForm">
+        <h1>Leave Your Review..!</h1>
+
+        <!-- Star Rating -->
+        <div class="review-rating">
+          <h3>Rate your experience</h3>
+          <div class="stars" id="starRating">
+            <span data-value="1">★</span>
+            <span data-value="2">★</span>
+            <span data-value="3">★</span>
+            <span data-value="4">★</span>
+            <span data-value="5">★</span>
+          </div>
+          <p id="ratingValue">Your rating: 0/5</p>
+        </div>
+
+        <!-- Comment Box -->
+        <textarea id="commentBox" placeholder="Write your feedback..." rows="4"></textarea>
+
+        <!-- Submit -->
+        <button class="btn-primary" id="submitReview">Submit Review</button>
+      </div>
+
+      <!-- Thank You Message -->
+      <div class="thank-you hidden" id="thankYouMsg">
+        <h3>🙏 Thanks for your review..!</h3>
+        <p>Thank you for sharing your valuable feedback❤️</p>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <a href="{{ url_for('index') }}" class="btn-primary">Back</a>
+    </footer>
+
+  </div>
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script>
+    // ⭐ Top Reviews Swiper
+  const reviewSwiperEl = document.querySelector(".reviewSwiper");
+const slideCount = reviewSwiperEl.querySelectorAll(".swiper-slide").length;
+
+new Swiper(".reviewSwiper", {
+  slidesPerView: "auto",   // show as many as fit
+  spaceBetween: 18,
+  loop: true,              // infinite loop
+  allowTouchMove: false,   // prevent user from stopping it
+  speed: 4000,             // higher = slower scroll
+  autoplay: {
+    delay: 0,              // continuous, no pause
+    disableOnInteraction: false,
+  },
+  freeMode: true,          // free scroll
+  freeModeMomentum: false, // no snapping back
+});
+
+
+
+    // ⭐ Rating functionality
+    const stars = document.querySelectorAll("#starRating span");
+    const ratingValue = document.getElementById("ratingValue");
+    const commentBox = document.getElementById("commentBox");
+    const submitBtn = document.getElementById("submitReview");
+    const reviewForm = document.getElementById("reviewForm");
+    const thankYouMsg = document.getElementById("thankYouMsg");
+
+    let selectedRating = 0;
+
+    stars.forEach(star => {
+      star.addEventListener("mouseover", () => {
+        resetStars();
+        highlightStars(star.dataset.value);
+      });
+
+      star.addEventListener("mouseout", () => {
+        resetStars();
+        if (selectedRating > 0) highlightStars(selectedRating);
+      });
+
+      star.addEventListener("click", () => {
+        selectedRating = star.dataset.value;
+        ratingValue.textContent = `Your rating: ${selectedRating}/5`;
+      });
+    });
+
+    function highlightStars(count) {
+      stars.forEach(s => {
+        if (s.dataset.value <= count) s.classList.add("active");
+      });
+    }
+    function resetStars() {
+      stars.forEach(s => s.classList.remove("active"));
+    }
+
+    submitBtn.addEventListener("click", () => {
+      if (selectedRating === 0 || commentBox.value.trim() === "") {
+        alert("Please select a rating and write a comment!");
+        return;
+      }
+      reviewForm.classList.add("hidden");
+      thankYouMsg.classList.remove("hidden");
+    });
+  </script>
+</body>
+</html>

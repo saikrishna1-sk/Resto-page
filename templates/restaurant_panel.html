@@ -1,0 +1,63 @@
+<!-- <!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Restaurant Panel</title></head>
+<body>
+  <h2>Restaurant Loyalty Management</h2>
+
+  {% if message %}
+    <p>{{ message }}</p>
+  {% endif %}
+
+  <form method="POST">
+    <input type="text" name="mobile" placeholder="Customer Mobile" required>
+    <input type="text" name="code" placeholder="Loyalty Code" required>
+    <button type="submit">Apply Badge</button>
+  </form>
+</body>
+</html> -->
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Restaurant Panel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/panel.css') }}">
+</head>
+<body>
+
+  <div class="panel-wrapper">
+    <div class="panel-card">
+      <h2>Restaurant Loyalty Management😊</h2>
+
+      {% if message %}
+        <p class="message">{{ message }}</p>
+      {% endif %}
+
+      <form method="POST">
+        <div class="input-group">
+          <input type="text" name="mobile" required>
+          <label>Customer Mobile :</label>
+          <span class="icon">📱</span>
+        </div>
+        <div class="input-group">
+          <input type="text" name="code" required>
+          <label>Loyalty Code :</label>
+          <span class="icon">🎫</span>
+        </div>
+        <button type="submit" name="action" value="apply">Apply Badge</button>
+      </form>
+      {% if customer and customer.badges == 10 and not customer.reward_claimed %}
+        <form method="POST">
+          <input type="hidden" name="mobile" value="{{ customer.mobile }}">
+          <button type="submit" name="action" value="claim" class="claim-btn">
+            Claim Reward 🎁
+          </button>
+        </form>
+        {% endif %}
+    </div>
+  </div>
+
+</body>
+</html>

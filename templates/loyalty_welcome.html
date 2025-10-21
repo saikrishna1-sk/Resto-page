@@ -1,0 +1,42 @@
+<!-- <!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Loyalty Club</title>
+</head>
+<body>
+  <h2>Welcome to our Loyalty Club 🎉</h2>
+  <form method="POST">
+    <input type="text" name="mobile" placeholder="Enter Mobile Number" required>
+    <button type="submit">Continue</button>
+  </form>
+
+  <p>Are you a restaurant? <a href="{{ url_for('restaurant_login') }}">Click here</a></p>
+</body>
+</html> -->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Loyalty Club</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="loyalty-wrapper">
+    <div class="loyalty-card loyalty-fade-in">
+      <h2 class="loyalty-title">Welcome to our Loyalty Club! </h2>
+
+      <form method="POST" class="loyalty-form loyalty-slide-up">
+        <input type="text" name="mobile" placeholder="📱 Enter Mobile Number" required class="loyalty-input">
+        <button type="submit" class="loyalty-btn">Continue</button>
+      </form>
+
+      <p class="loyalty-restaurant-link">
+        Are you a restaurant? <a href="{{ url_for('restaurant_login') }}">Click here</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>

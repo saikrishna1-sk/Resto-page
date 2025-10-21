@@ -1,0 +1,111 @@
+<!-- <!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Your Badges</title>
+  <style>
+    .badge { font-size: 2rem; padding: 5px; }
+    .filled { color: gold; animation: pop 0.5s ease; }
+    .empty { color: lightgray; }
+    @keyframes pop {
+      0% { transform: scale(0.5); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <h2>Your Loyalty Badges ⭐</h2>
+  <div>
+    {% for i in range(1,11) %}
+      {% if i <= customer.badges %}
+        <span class="badge filled">★</span>
+      {% else %}
+        <span class="badge empty">☆</span>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  {% if customer.badges == 10 %}
+    <button>Claim Reward 🎁</button>
+  {% endif %}
+</body>
+</html>  -->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Your Badges</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/badges.css') }}">
+</head>
+<body>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-box">
+      {% for category, message in messages %}
+        <p class="flash-{{ category }}">{{ message }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+  <div class="badge-wrapper">
+    <div class="badge-card badge-fade-in">
+      <h2 class="badge-title">Your Loyalty Badges 🪙</h2>
+      <div class="badge-container">
+  {% for i in range(1,11) %}
+    {% if i <= customer.badges %}
+      <div class="ticket filled-ticket">
+        <div class="logo">🎟️</div>
+        <div class="label">Badge {{ i }}</div>
+      </div>
+    {% else %}
+      <div class="ticket empty-ticket">
+        <div class="logo">🔒</div>
+        <div class="label">Locked</div>
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>
+
+{% if customer.reward_claimed %}
+  {% if customer.badges != 10 %}
+    <p class="claimed-msg">🎉 Reward Claimed! Level Up 🚀</p>
+  {% else %}
+    <p class="claimed-msg">🎁 Reward Claimed!</p>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        launchConfetti();
+      });
+    </script>
+  {% endif %}
+{% endif %}
+    </div>
+  </div>
+
+  <script>
+    function launchConfetti() {
+      const duration = 2000;
+      const end = Date.now() + duration;
+      const colors = ['#fce21b', '#ff9800', '#1e90ff', '#ff4081', '#4caf50'];
+
+      (function frame() {
+        const timeLeft = end - Date.now();
+        if (timeLeft <= 0) return;
+
+        for (let i = 0; i < 5; i++) {
+          const confetti = document.createElement('div');
+          confetti.className = 'confetti';
+          confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+          confetti.style.left = Math.random() * 100 + 'vw';
+          confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+          document.body.appendChild(confetti);
+          setTimeout(() => confetti.remove(), 3000);
+        }
+        requestAnimationFrame(frame);
+      })();
+    }
+  </script>
+</body>
+</html>

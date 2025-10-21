@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Our Menu</title>
+
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="header fade-in">
+      <h1 class="title">🍴 Our Menu</h1>
+      <p class="subtitle">Swipe to explore</p>
+    </header>
+
+    <!-- Category Tabs -->
+    <div class="tabs">
+      <button class="tab-btn active" data-category="starters">🥗 Starters</button>
+      <button class="tab-btn" data-category="main">🍛 Main Course</button>
+      <button class="tab-btn" data-category="bar">🍹 Bar</button>
+    </div>
+
+    <!-- Starters -->
+   <section class="menu-section active" id="starters">
+  <div class="swiper menuSwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide menu-card">
+        <img src="{{ url_for('static', filename='images/starters/s1.png') }}" alt="Starter 1">
+      </div>
+      <div class="swiper-slide menu-card">
+        <img src="{{ url_for('static', filename='images/starters/s2.png') }}" alt="Starter 2">
+      </div>
+      <div class="swiper-slide menu-card">
+        <img src="{{ url_for('static', filename='images/starters/s3.png') }}" alt="Starter 3">
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Main Course -->
+  <section class="menu-section" id="main">
+  <div class="swiper menuSwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide menu-card">
+        <img src="{{ url_for('static', filename='images/main/m1.png') }}" alt="Main 1">
+      </div>
+      <div class="swiper-slide menu-card">
+        <img src="{{ url_for('static', filename='images/main/m2.png') }}" alt="Main 2">
+      </div>
+      <div class="swiper-slide menu-card">
+        <img src="{{ url_for('static', filename='images/main/m3.png') }}" alt="Main 3">
+      </div>
+    </div>
+  </div>
+</section>
+    
+    <!-- Bar -->
+<section class="menu-section" id="bar">
+  <div class="swiper menuSwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide menu-card">
+        <img src="{{ url_for('static', filename='images/bar/b1.png') }}" alt="Main 1">
+      </div>
+      <div class="swiper-slide menu-card">
+        <img src="{{ url_for('static', filename='images/bar/b2.png') }}" alt="Main 2">
+      </div>
+      <div class="swiper-slide menu-card">
+        <img src="{{ url_for('static', filename='images/bar/b3.png') }}" alt="Main 3">
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <a href="{{ url_for('index') }}" class="btn-primary">Back</a>
+    </footer>
+  </div>
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    // Initialize swiper for each section
+    // Initialize swiper for each section
+document.querySelectorAll(".menuSwiper").forEach(swiperEl => {
+  const slideCount = swiperEl.querySelectorAll(".swiper-slide").length;
+
+  new Swiper(swiperEl, {
+    slidesPerView: 1,
+    spaceBetween: 18,
+    centeredSlides: true,
+    autoplay: { delay: 2500, disableOnInteraction: false },
+    effect: "coverflow",
+    coverflowEffect: {
+      rotate: 20,
+      stretch: 0,
+      depth: 120,
+      modifier: 1,
+      slideShadows: true,
+    },
+    loop: slideCount > 2 // 👈 only enable loop if enough slides
+  });
+});
+
+
+    // Tab switching
+    const tabs = document.querySelectorAll(".tab-btn");
+    const sections = document.querySelectorAll(".menu-section");
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        tabs.forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+        sections.forEach(sec => sec.classList.remove("active"));
+        document.getElementById(tab.dataset.category).classList.add("active");
+      });
+    });
+  </script>
+</body>
+</html>

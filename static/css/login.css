@@ -1,0 +1,131 @@
+/* Reset */
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+
+/* Background */
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #fff4e6, #ffe0b3);
+}
+
+/* Wrapper */
+.login-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+/* Login card */
+.login-card {
+  background: #fff;
+  padding: 3.5rem 3rem;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 550px;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.login-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+}
+
+/* Title */
+.login-card h2 {
+  margin-bottom: 2rem;
+  color: #ff9800;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+/* Input group */
+.input-group {
+  position: relative;
+  margin-bottom: 1.8rem;
+}
+.input-group input {
+  width: 100%;
+  padding: 1rem 1rem 1rem 2.8rem;
+  border: 1.5px solid #ccc;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+.input-group input:focus {
+  border-color: #ff9800;
+  box-shadow: 0 0 6px rgba(255,152,0,0.4);
+  outline: none;
+}
+.input-group label {
+  position: absolute;
+  top: 50%;
+  left: 2.8rem;
+  transform: translateY(-50%);
+  color: #888;
+  pointer-events: none;
+  transition: 0.3s ease all;
+}
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label {
+  top: -10px;
+  left: 1rem;
+  font-size: 1rem;
+  color: #ff9800;
+  background: #fff;
+  padding: 0 0.6rem;
+}
+
+/* Input icon */
+.input-group .icon {
+  position: absolute;
+  top: 50%;
+  left: 0.9rem;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  color: #ff9800;
+}
+
+/* Button */
+.login-card button {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 14px;
+  background: #ff9800;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+.login-card button:hover {
+  background: #e67e00;
+  transform: scale(1.03);
+}
+
+/* Forgot link */
+.forgot-link {
+  display: block;
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: #ff9800;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.forgot-link:hover { color: #e67e00; }
+
+/* Responsive */
+@media (max-width: 480px) {
+  .login-card {
+    padding: 2rem 1.5rem;
+  }
+  .login-card h2 { font-size: 1.6rem; }
+  .input-group input { padding: 0.85rem 1rem 0.85rem 2.5rem; font-size: 0.95rem; }
+  .input-group .icon { font-size: 1rem; left: 0.7rem; }
+  .login-card button { font-size: 1rem; padding: 0.85rem; }
+}

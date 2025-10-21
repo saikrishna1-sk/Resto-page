@@ -1,0 +1,44 @@
+<!-- <!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Restaurant Login</title></head>
+<body>
+  <h2>Restaurant Login</h2>
+  <form method="POST">
+    <input type="text" name="name" placeholder="Restaurant Name" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html> -->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Restaurant Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body>
+
+  <div class="login-wrapper">
+    <div class="login-card">
+      <h2>Restaurant Login...!</h2>
+      <form method="POST">
+        <div class="input-group">
+          <input type="text" name="name" required>
+          <label>Restaurant Name :</label>
+          <span class="icon">🍴</span>
+        </div>
+        <div class="input-group">
+          <input type="password" name="password" required>
+          <label>Password :</label>
+          <span class="icon">🔒</span>
+        </div>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>
